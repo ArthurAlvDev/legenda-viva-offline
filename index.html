@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legenda Viva Offline — OlacDev</title>
+  <style>
+    :root { --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #cbd5e1; --primary: #38bdf8; --border: #334155; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    main { max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; }
+    .kiosk { background: #000; border: 2px solid var(--primary); border-radius: 12px; padding: 24px; min-height: 160px; font-size: 1.75rem; font-weight: 700; margin: 16px 0; }
+    button { background: var(--primary); color: #0f172a; border: 0; padding: 12px 18px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+    footer { text-align: center; padding: 24px 16px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--border); }
+    footer a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Legenda Viva Offline (Modo Kiosk)</h1>
+    <p>Legendagem em tempo real de alto contraste para pessoas surdas e idosos, direto no navegador.</p>
+    <button id="start" type="button">Iniciar Reconhecimento de Voz</button>
+    <div id="kiosk" class="kiosk" aria-live="polite">Aguardando fala...</div>
+  </main>
+  <footer>Made by <a href="https://olacdev.com/" target="_blank" rel="noopener noreferrer">OlacDev</a></footer>
+  <script type="module">
+    const kiosk = document.getElementById('kiosk');
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    document.getElementById('start').addEventListener('click', () => {
+      if (!SR) {
+        kiosk.textContent = 'Navegador sem Web Speech API. Use Chrome/Edge para legendagem ao vivo.';
+        return;
+      }
+      const rec = new SR();
+      rec.lang = 'pt-BR';
+      rec.continuous = true;
+      rec.interimResults = true;
+      rec.onresult = (e) => {
+        const text = Array.from(e.results).map((r) => r[0].transcript).join(' ');
+        kiosk.textContent = text;
+      };
+      rec.start();
+    });
+  </script>
+</body>
+</html>
