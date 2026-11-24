@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legenda Viva Offline — OlacDev</title>
+  <meta name="description" content="Legenda Viva Offline: legendagem em tempo real de alto contraste para pessoas surdas e idosos, direto no navegador." />
   <style>
     :root { --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #cbd5e1; --primary: #38bdf8; --border: #334155; }
     * { box-sizing: border-box; }
@@ -14,6 +15,7 @@
     footer { text-align: center; padding: 24px 16px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--border); }
     footer a { color: var(--primary); font-weight: 600; text-decoration: none; }
   </style>
+  <link rel="canonical" href="https://legendaviva.olacdev.com/" />
 </head>
 <body>
   <main>
@@ -21,6 +23,10 @@
     <p>Legendagem em tempo real de alto contraste para pessoas surdas e idosos, direto no navegador.</p>
     <button id="start" type="button">Iniciar Reconhecimento de Voz</button>
     <div id="kiosk" class="kiosk" aria-live="polite">Aguardando fala...</div>
+      <section class="card" aria-labelledby="institucional-title">
+      <h2 id="institucional-title">Uso Institucional e Demonstração</h2>
+      <p>Ferramenta gratuita para auditórios, salas de aula, eventos públicos e atendimentos presenciais acessíveis. Para uso institucional em rede, acesse olacdev.com.</p>
+    </section>
   </main>
   <footer>Made by <a href="https://olacdev.com/" target="_blank" rel="noopener noreferrer">OlacDev</a></footer>
   <script type="module">
@@ -42,5 +48,6 @@
       rec.start();
     });
   </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
